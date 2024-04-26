@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="center">
+<h1>чем я могу помочь?</h1>
+<form action="" method="post" class="ask">
+    {{ form.hidden_tag() }}
+    <div class="d-flex">
+        {{ form.ask(class="form-control", placeholder="enter...") }}<br>
+        <p>{{ form.submit(type="submit", class="btn btn-primary") }}</p>
+    </div>
+</form>
+</div>
+{% endblock %}

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+          crossorigin="anonymous">
+    <link rel="stylesheet" href="../static/css/style.css">
+    <title>{{ title }}</title>
+</head>
+<body class="d-flex" style="background-color: #e6e6e6 ">
+    <div style="min-height: 100vh" class="col-2 bg-secondary">
+    <div style="overflow-y: auto">
+        <ul>
+            <h1>история</h1>
+            {% for item in chats%}
+                {% if current_user.is_authenticated and current_user == item.user %}
+                    <div class="d-flex">
+                        <li><a href="/chats/{{ item.id }}">{{item.name}}</a></li>
+                        <div class="pt-4">
+                            <a href="/archive/{{ item.id }}"><img src="../static/img/archive.png"  width="30" height="30"></a>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+
+        </ul>
+    </div>
+        <a href="archive">
+        <div class="ask d-flex">
+            <img src="../static/img/archive.png"  width="40" height="40">
+            <h2 class="ml-3">архивные чаты</h2>
+        </div>
+        </a>
+    </div>
+
+    <div class="col-10" style=" padding: 0">
+        <header>
+            <nav class="navbar navbar-light" >
+                <a class="h1" href="/">Главная</a>
+                {% if current_user.is_authenticated %}
+                    <a class="navbar-brand" href="/logout">{{ current_user.name }}</a>
+                {% else %}
+                    <p>
+                        <a class="btn btn-primary " href="/register">Зарегистрироваться</a>
+                        <a class="btn btn-success" href="/login">Войти</a>
+                    </p>
+                {% endif %}
+            </nav>
+        </header>
+        <!-- Begin page content -->
+        <main role="main" style="height: 100%">
+            {% block content %}{% endblock %}
+        </main>
+    </div>
+</body>
+</html>

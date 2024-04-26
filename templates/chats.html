@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div style="height: 800px overflow-y: auto">
+    {% for item in chat%}
+        <pre>
+        {% if item.role == 'user' %}
+            <p class="p-3">{{current_user.name}}: {{item.text}}</p>
+        {% else %}
+            <p class="p-3">Помошник: {{item.text}}</p>
+        {% endif %}
+        </pre>
+    {% endfor %}
+</div>
+<form action="" method="post" class="ask">
+    {{ form.hidden_tag() }}
+    <div class="d-flex">
+        {{ form.ask(class="form-control", placeholder="enter...") }}<br>
+        <p>{{ form.submit(type="submit", class="btn btn-primary") }}</p>
+
+        {% for error in form.ask.errors %}
+            <p class="alert alert-danger" role="alert">
+                {{ error }}
+            </p>
+        {% endfor %}
+    </div>
+    {{message}}
+</form>
+{% endblock %}
