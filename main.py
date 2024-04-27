@@ -20,7 +20,6 @@ def main():
     app.run()
 
 
-
 @app.route("/")
 def index():
     db_sess = db_session.create_session()
@@ -160,7 +159,6 @@ def chat(id):
         db_sess.commit()
 
     return render_template('chats.html',
-                           title='Редактирование новости',
                            form=form,
                            chat=messages,
                            chats=chats
